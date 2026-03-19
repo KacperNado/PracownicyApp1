@@ -23,6 +23,10 @@ namespace PracownicyApp
             table.Columns.Add("Stanowisko");
 
             dataGridView1.DataSource = table;
+            dataGridView1.ReadOnly = true;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
         private void btnAdd_Click_1(object sender, EventArgs e)
@@ -91,6 +95,11 @@ namespace PracownicyApp
                     table.Rows.Add(values);
                 }
             }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
