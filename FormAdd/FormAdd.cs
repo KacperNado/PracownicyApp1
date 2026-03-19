@@ -14,11 +14,13 @@ namespace PracownicyApp
             cmbStanowisko.Items.Add("Manager");
             cmbStanowisko.Items.Add("Programista");
             cmbStanowisko.Items.Add("Tester");
+            cmbStanowisko.DropDownStyle = ComboBoxStyle.DropDownList;
+
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-          
+
         }
 
         private void txtImie_TextChanged(object sender, EventArgs e)
@@ -35,6 +37,11 @@ namespace PracownicyApp
 
             DialogResult = DialogResult.OK;
             Close();
+        }
+
+        private void cmbStanowisko_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
