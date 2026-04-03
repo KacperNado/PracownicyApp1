@@ -3,11 +3,13 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace PracownicyApp
 {
     public partial class Form1 : Form
     {
+
         private DataTable table = new DataTable();
         private int currentID = 1;
 
@@ -101,5 +103,39 @@ namespace PracownicyApp
         {
 
         }
+        public List<Osoba> PobierzOsobyZTabeli()
+        {
+            List<Osoba> lista = new List<Osoba>();
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                Osoba o = new Osoba();
+                o.ID = int.Parse(row.Cells[0].Value.ToString());
+                o.Imie = row.Cells[1].Value?.ToString();
+                o.Nazwisko = row.Cells[2].Value?.ToString();
+                o.Wiek = int.Parse(row.Cells[3].Value.ToString());
+                o.Stanowisko = row.Cells[4].Value?.ToString();
+
+                lista.Add(o);
+            }
+
+            return lista;
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var lista = PobierzOsobyZTabeli();
+
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Osoba>));
+
+            using (TextWriter writer = new StreamWriter("osoby.xml"))
+            {
+                serializer.Serialize(writer, lista);
+            }
+
+            MessageBox.Show("Zapisano XML");
+        }
     }
+
 }
